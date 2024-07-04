@@ -1,17 +1,11 @@
-// import express from "express";
-// import userRouter from "./users.route"; // Adjust the path as needed
-
-// const router = express.Router();
-
-// router.use("/users", userRouter);
-
-// export default router;
-
 import express from "express";
-import userRouter from "./users.route.js"; // Adjust the path as needed
+import userRouter from "./users.route.js";
+import employeeRouter from "./employees.routes.js";
 
 const router = express.Router();
 
 router.use("/users", userRouter);
+
+router.use("/employees", employeeRouter);
 
 export default router;
