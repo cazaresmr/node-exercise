@@ -10,10 +10,9 @@ const findOne = async (id) => {
     [id]
   );
 };
-`   `;
 
 const addOne = async (employee) => {
-  return await query("INSERT INTO employees SET ?", [employee]);
+  return await query("INSERT INTO employees SET ?", employee);
 };
 
 const updateOne = async (id, employee) => {
