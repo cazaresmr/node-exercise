@@ -5,15 +5,8 @@ const router = express.Router();
 
 router.get("/:id?", async (req, res, next) => {
   try {
-    let { id } = req.params;
-    let data;
-
-    if (id) {
-      data = await employees.findOne(id);
-    } else {
-      data = await employees.findAll();
-    }
-
+    const { id } = req.params;
+    const data = id ? await employees.findOne(id) : await employees.findAll();
     res.json(data);
   } catch (error) {
     next(error);
@@ -22,12 +15,12 @@ router.get("/:id?", async (req, res, next) => {
 
 router.post("/", async (req, res, next) => {
   try {
-    let employeeDTO = req.body;
+    const employeeDTO = req.body;
     if (!employeeDTO || Object.keys(employeeDTO).length === 0) {
       return res.status(400).json({ error: "Employee data is required" });
     }
-    let data = await employees.addOne(employeeDTO);
-    res.json(data);
+    const data = await employees.addOne(employeeDTO);
+    res.status(201).json(data); // 201 for resource creation
   } catch (error) {
     next(error);
   }
@@ -35,9 +28,9 @@ router.post("/", async (req, res, next) => {
 
 router.put("/:id", async (req, res, next) => {
   try {
-    let { id } = req.params;
-    let employeeDTO = req.body;
-    let data = await employees.updateOne(id, employeeDTO);
+    const { id } = req.params;
+    const employeeDTO = req.body;
+    const data = await employees.updateOne(id, employeeDTO);
     res.json(data);
   } catch (error) {
     next(error);
@@ -46,8 +39,8 @@ router.put("/:id", async (req, res, next) => {
 
 router.delete("/:id", async (req, res, next) => {
   try {
-    let { id } = req.params;
-    let data = await employees.removeOne(id);
+    const { id } = req.params;
+    const data = await employees.removeOne(id);
     res.json(data);
   } catch (error) {
     next(error);
