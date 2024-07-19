@@ -1,11 +1,13 @@
 import query from "../db/utils.js";
 
 const findAll = async () => {
-  return query("SELECT EmployeeID, FirstName, LastName, Title FROM employees");
+  return await query(
+    "SELECT EmployeeID, FirstName, LastName, Title FROM employees"
+  );
 };
 
 const findOne = async (id) => {
-  return query(
+  return await query(
     "SELECT EmployeeID, FirstName, LastName, Title FROM employees WHERE EmployeeID = ?",
     [id]
   );
